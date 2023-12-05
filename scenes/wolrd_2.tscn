@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmr2nvaf5web8"]
+
+[ext_resource type="PackedScene" uid="uid://bodddh82mgv7q" path="res://scenes/Tilemap2.tscn" id="1_86nrn"]
+[ext_resource type="PackedScene" uid="uid://dnil0awakll2q" path="res://scenes/doors.tscn" id="2_256on"]
+[ext_resource type="PackedScene" uid="uid://e3wfpps15v1g" path="res://scenes/player.tscn" id="3_8s6if"]
+[ext_resource type="PackedScene" uid="uid://k2kdnafn41fa" path="res://scenes/item_upgrade.tscn" id="4_qds13"]
+[ext_resource type="PackedScene" uid="uid://cly7wnxb6fvcx" path="res://scenes/new_scenes/wall_hugger_enemy.tscn" id="6_12e0i"]
+[ext_resource type="Texture2D" uid="uid://bik455f0gy2sl" path="res://Sprites/Items/Missle_pickup.png" id="6_fdfkn"]
+
+[node name="wolrd_2" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_86nrn")]
+
+[node name="Player" parent="." instance=ExtResource("3_8s6if")]
+position = Vector2(128, 32)
+
+[node name="Door_col" parent="." instance=ExtResource("2_256on")]
+position = Vector2(-64, 112)
+scale = Vector2(-1, -1)
+is_red_door = true
+
+[node name="portal" parent="Door_col" index="2"]
+portal_exit = "res://scenes/world.tscn"
+portal_spawn = Vector2(232, 144)
+
+[node name="Item_upgrade" parent="." instance=ExtResource("4_qds13")]
+position = Vector2(176, 168)
+upgrade_type = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(232, 144)
+
+[node name="Item_upgrade2" parent="." instance=ExtResource("4_qds13")]
+position = Vector2(232, 96)
+skin = ExtResource("6_fdfkn")
+item_id = -1
+
+[node name="wall_hugger" parent="." instance=ExtResource("6_12e0i")]
+position = Vector2(168, 136)
+
+[node name="door_to_boss" parent="." instance=ExtResource("2_256on")]
+position = Vector2(256, 144)
+
+[node name="portal" parent="door_to_boss" index="2"]
+portal_exit = "res://scenes/new_scenes/boss_room_node.tscn"
+portal_spawn = Vector2(-184, 168)
+
+[editable path="Door_col"]
+[editable path="door_to_boss"]

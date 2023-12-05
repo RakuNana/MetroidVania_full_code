@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr2jikvokgq4r"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_56wd7"]
+[ext_resource type="Texture2D" uid="uid://dde0p363g74wc" path="res://Sprites/MISC/zero_misson_inventory_screen.png" id="1_a5lkf"]
+[ext_resource type="Script" path="res://scenes/Map_button.gd" id="3_id0pl"]
+
+[node name="Menu_overlay" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_56wd7")
+
+[node name="menu_bg" type="TextureRect" parent="."]
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("1_a5lkf")
+
+[node name="Current_hp" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Max_hp" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(4, 49)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 184.0
+offset_top = 160.0
+offset_right = 232.0
+offset_bottom = 184.0
+text = "Map"
+script = ExtResource("3_id0pl")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

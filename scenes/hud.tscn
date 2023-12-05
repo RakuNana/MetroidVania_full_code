@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://7b62iyfr32nu"]
+
+[ext_resource type="Script" path="res://scripts/hud_display.gd" id="1_cusew"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_cusew")
+
+[node name="Missle_name" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Missles :"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="amount" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 1.0
+offset_right = 108.0
+offset_bottom = 27.0
+text = "0"
+
+[node name="Health_text" type="RichTextLabel" parent="."]
+offset_top = 16.0
+offset_right = 83.0
+offset_bottom = 43.0
+theme_override_font_sizes/normal_font_size = 17
+text = "Health :"
+
+[node name="current_health" type="Label" parent="."]
+offset_left = 68.0
+offset_top = 19.0
+offset_right = 108.0
+offset_bottom = 45.0
+text = "0"

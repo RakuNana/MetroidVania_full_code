@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxjwrdgwsx5kl"]
+
+[ext_resource type="Script" path="res://scripts/bullets.gd" id="1_rihnl"]
+[ext_resource type="Texture2D" uid="uid://dih7mrnvvy8cw" path="res://Sprites/Bullets.png" id="1_t8p73"]
+[ext_resource type="PackedScene" uid="uid://d4kbk4tnmg0rv" path="res://scenes/missle_rotate.tscn" id="3_vgsbb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dq37"]
+size = Vector2(14, 14)
+
+[node name="Bullets" type="Area2D"]
+script = ExtResource("1_rihnl")
+power = 1
+
+[node name="ammo" type="Sprite2D" parent="."]
+texture = ExtResource("1_t8p73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6dq37")
+
+[node name="Missle_rotate" parent="." instance=ExtResource("3_vgsbb")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

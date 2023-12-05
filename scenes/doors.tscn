@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnil0awakll2q"]
+
+[ext_resource type="Script" path="res://scripts/doors.gd" id="1_cawxb"]
+[ext_resource type="Texture2D" uid="uid://wni4h266ngax" path="res://Sprites/MISC/Door_frames.png" id="1_ujjjg"]
+[ext_resource type="Script" path="res://scripts/portal.gd" id="3_tr4l1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21iv8"]
+size = Vector2(11, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk20q"]
+size = Vector2(14, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_en8x0"]
+size = Vector2(26, 64)
+
+[node name="Door_col" type="Area2D"]
+script = ExtResource("1_cawxb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ujjjg")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8.5, 0)
+shape = SubResource("RectangleShape2D_21iv8")
+
+[node name="portal" type="Area2D" parent="."]
+position = Vector2(24, 0)
+script = ExtResource("3_tr4l1")
+portal_exit = "res://scenes/Add_to_inventory.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="portal"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_qk20q")
+
+[node name="Door_block" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door_block"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_en8x0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="portal" to="portal" method="_on_body_entered"]

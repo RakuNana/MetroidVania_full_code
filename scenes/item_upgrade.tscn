@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://k2kdnafn41fa"]
+
+[ext_resource type="Script" path="res://scripts/item_upgrade.gd" id="1_7v43v"]
+[ext_resource type="Texture2D" uid="uid://cg7wvtjg6qiiu" path="res://Sprites/Items/Missle_get.png" id="2_0ayff"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0af1"]
+
+[node name="Item_upgrade" type="Area2D"]
+script = ExtResource("1_7v43v")
+item_name = "Missile"
+skin = ExtResource("2_0ayff")
+get_amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y0af1")
+
+[node name="Item_sprite" type="Sprite2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

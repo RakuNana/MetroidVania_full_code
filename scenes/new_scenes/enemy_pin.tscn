@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://xsk24v57f6c4"]
+
+[ext_resource type="Script" path="res://scenes/new_scenes/enemy_pin_script.gd" id="1_2qxde"]
+[ext_resource type="Texture2D" uid="uid://86k0boj18kvj" path="res://Sprites/enemies_sprites/enemy_pin.png" id="2_yajwq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsvus"]
+size = Vector2(5.5, 6)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_2qxde")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_yajwq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_gsvus")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

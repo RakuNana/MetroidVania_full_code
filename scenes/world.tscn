@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://doopf8odds555"]
+
+[ext_resource type="PackedScene" uid="uid://e3wfpps15v1g" path="res://scenes/player.tscn" id="1_3vjm5"]
+[ext_resource type="PackedScene" uid="uid://dibnp2tc1624h" path="res://scenes/Tilemap.tscn" id="2_q0k2o"]
+[ext_resource type="PackedScene" uid="uid://k2kdnafn41fa" path="res://scenes/item_upgrade.tscn" id="3_c0h45"]
+[ext_resource type="Texture2D" uid="uid://bik455f0gy2sl" path="res://Sprites/Items/Missle_pickup.png" id="4_vmisx"]
+[ext_resource type="PackedScene" uid="uid://dnil0awakll2q" path="res://scenes/doors.tscn" id="5_wv4ps"]
+[ext_resource type="PackedScene" uid="uid://di3wwyl32txim" path="res://scenes/save_area_col.tscn" id="6_6t3ih"]
+[ext_resource type="Texture2D" uid="uid://dih7mrnvvy8cw" path="res://Sprites/Bullets.png" id="7_qkl8k"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_3vjm5")]
+
+[node name="Node2D" parent="." instance=ExtResource("2_q0k2o")]
+
+[node name="Item_upgrade" parent="." instance=ExtResource("3_c0h45")]
+position = Vector2(216, 88)
+item_id = 1
+upgrade_type = true
+
+[node name="Item_upgrade2" parent="." instance=ExtResource("3_c0h45")]
+position = Vector2(104, 168)
+skin = ExtResource("4_vmisx")
+get_amount = 2
+item_id = -1
+
+[node name="Door_col" parent="." instance=ExtResource("5_wv4ps")]
+position = Vector2(256, 144)
+
+[node name="portal" parent="Door_col" index="2"]
+portal_exit = "res://scenes/wolrd_2.tscn"
+portal_spawn = Vector2(-40, 120)
+send_next_room_id = 1
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(232, 144)
+
+[node name="Save_area_col" parent="." instance=ExtResource("6_6t3ih")]
+position = Vector2(-48, 96)
+
+[node name="Item_upgrade3" parent="." instance=ExtResource("3_c0h45")]
+position = Vector2(72, 72)
+item_name = "Health"
+skin = ExtResource("7_qkl8k")
+get_amount = 50
+item_id = -2
+
+[editable path="Door_col"]

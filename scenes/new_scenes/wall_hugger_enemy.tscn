@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=3 uid="uid://cly7wnxb6fvcx"]
+
+[ext_resource type="Script" path="res://scenes/new_scenes/wall_hugger_enemy.gd" id="1_qwu8t"]
+[ext_resource type="Texture2D" uid="uid://dl80gg5ulo1xe" path="res://Sprites/enemies_sprites/small_enemy.png" id="2_5nxu3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yawi8"]
+atlas = ExtResource("2_5nxu3")
+region = Rect2(0, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nj6v"]
+atlas = ExtResource("2_5nxu3")
+region = Rect2(32, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5krrf"]
+atlas = ExtResource("2_5nxu3")
+region = Rect2(64, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq6hk"]
+atlas = ExtResource("2_5nxu3")
+region = Rect2(96, 0, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo5bk"]
+atlas = ExtResource("2_5nxu3")
+region = Rect2(128, 0, 32, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tyaow"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yawi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nj6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5krrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kq6hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo5bk")
+}],
+"loop": true,
+"name": &"small_en_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j5hh"]
+size = Vector2(160, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyjip"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_by6hd"]
+size = Vector2(10, 9)
+
+[node name="wall_hugger" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+script = ExtResource("1_qwu8t")
+damage_amount = 15
+
+[node name="Sprite_pivot" type="Marker2D" parent="."]
+scale = Vector2(0.5, 0.516129)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Sprite_pivot"]
+position = Vector2(0, -5.8125)
+sprite_frames = SubResource("SpriteFrames_tyaow")
+animation = &"small_en_walk"
+frame = 4
+frame_progress = 0.00296278
+
+[node name="enemy_eyes" type="Area2D" parent="Sprite_pivot/Sprite2D"]
+self_modulate = Color(0, 0.462745, 0.847059, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite_pivot/Sprite2D/enemy_eyes"]
+visible = false
+self_modulate = Color(0, 0.462745, 0.847059, 1)
+shape = SubResource("RectangleShape2D_1j5hh")
+
+[node name="Check_left" type="RayCast2D" parent="Sprite_pivot/Sprite2D/enemy_eyes"]
+position = Vector2(0, 6)
+rotation = 1.5708
+target_position = Vector2(9.53674e-07, 18)
+
+[node name="Check_right" type="RayCast2D" parent="Sprite_pivot/Sprite2D/enemy_eyes"]
+position = Vector2(0, 6)
+rotation = -1.5708
+target_position = Vector2(0.187499, 18)
+
+[node name="Check_ceiling_left" type="RayCast2D" parent="Sprite_pivot/Sprite2D/enemy_eyes"]
+position = Vector2(-11.625, 5.81358)
+rotation = -1.5708
+target_position = Vector2(-15.4989, -0.375046)
+
+[node name="Check_ceiling_right" type="RayCast2D" parent="Sprite_pivot/Sprite2D/enemy_eyes"]
+position = Vector2(9.99054, 5.8125)
+rotation = -1.5708
+target_position = Vector2(-15.5, -0.0413561)
+
+[node name="hit_box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+shape = SubResource("RectangleShape2D_uyjip")
+debug_color = Color(0.945098, 0, 0.6, 0.419608)
+
+[node name="body_collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_by6hd")
+debug_color = Color(0, 0.6, 0, 0.419608)
+
+[connection signal="body_exited" from="Sprite_pivot/Sprite2D/enemy_eyes" to="." method="_on_enemy_eyes_body_exited"]
+[connection signal="area_entered" from="hit_box" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="hit_box" to="." method="_on_hit_box_body_entered"]

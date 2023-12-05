@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://di3wwyl32txim"]
+
+[ext_resource type="Script" path="res://scripts/save_area_col.gd" id="1_bog20"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s60fq"]
+size = Vector2(20, 54)
+
+[node name="Save_area_col" type="Area2D"]
+script = ExtResource("1_bog20")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_s60fq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
